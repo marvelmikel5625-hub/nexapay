@@ -1,7 +1,15 @@
-import { createContext, useContext, useState, useEffect } from 'react'
-import { useAuth } from './AuthContext'
-import { Wallet } from '../types/wallet.types'
-import { walletService } from '../services/wallet.service'
+import { createContext, useState, useEffect, ReactNode } from 'react'
+import { useAuth } from '../hooks/useAuth'
+
+interface Wallet {
+  id: string
+  user_id: string
+  balance: number
+  currency: string
+  status: 'active' | 'frozen' | 'suspended' | 'closed'
+  created_at: string
+  updated_at: string
+}
 
 interface WalletContextType {
   wallet: Wallet | null
@@ -10,9 +18,10 @@ interface WalletContextType {
   updateBalance: (amount: number) => Promise<void>
 }
 
-const WalletContext = createContext<WalletContextType | undefined>(undefined)
+// Export the context
+export const WalletContext = createContext<WalletContextType | undefined>(undefined)
 
-export function WalletProvider({ children }: { children: React.ReactNode }) {
+export function WalletProvider({ children }: { children: ReactNode }) {
   const [wallet, setWallet] = useState<Wallet | null>(null)
   const [loading, setLoading] = useState(true)
   const { user } = useAuth()
@@ -25,8 +34,17 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      const data = await walletService.getWallet(user.id)
-      setWallet(data)
+      // Mock wallet for demo
+      const mockWallet: Wallet = {
+        id: 'wallet-1',
+        user_id: user.id,
+        balance: 12545000, // ₦125,450.00 in kobo
+        currency: 'NGN',
+        status: 'active',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+      setWallet(mockWallet)
     } catch (error) {
       console.error('Failed to fetch wallet:', error)
     } finally {
@@ -56,10 +74,4 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       {children}
     </WalletContext.Provider>
   )
-}
-
-export function useWallet() {
-  const context = useContext(WalletContext)
-  if (!context) throw new Error('useWallet must be used within a WalletProvider')
-  return context
 }
