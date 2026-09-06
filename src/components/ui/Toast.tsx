@@ -127,6 +127,7 @@ function ToastItem({ toast, onClose }: ToastItemProps) {
   )
 }
 
+// Export ToastContainer for App.tsx
 export function ToastContainerExport() {
   return null
 }
