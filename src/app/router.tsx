@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { ProtectedRoute } from '../components/auth/ProtectedRoute'
 import { DashboardLayout } from '../components/layout/DashboardLayout'
 
-// Public Pages
+// Import all pages (make sure these files exist)
 import { WelcomePage } from '../pages/auth/WelcomePage'
 import { LoginPage } from '../pages/auth/LoginPage'
 import { RegisterPage } from '../pages/auth/RegisterPage'
@@ -11,8 +11,6 @@ import { VerifyEmailPage } from '../pages/auth/VerifyEmailPage'
 import { CreatePinPage } from '../pages/auth/CreatePinPage'
 import { ForgotPasswordPage } from '../pages/auth/ForgotPasswordPage'
 import { ResetPasswordPage } from '../pages/auth/ResetPasswordPage'
-
-// Protected Pages
 import { DashboardPage } from '../pages/dashboard/DashboardPage'
 import { WalletPage } from '../pages/wallet/WalletPage'
 import { AddMoneyPage } from '../pages/wallet/AddMoneyPage'
@@ -34,8 +32,6 @@ import { KYCProgressPage } from '../pages/profile/KYCProgressPage'
 import { SecurityPage } from '../pages/profile/SecurityPage'
 import { BeneficiariesPage } from '../pages/profile/BeneficiariesPage'
 import { SupportPage } from '../pages/support/SupportPage'
-
-// Legal Pages
 import { TermsPage } from '../pages/legal/TermsPage'
 import { PrivacyPage } from '../pages/legal/PrivacyPage'
 import { SecurityPolicyPage } from '../pages/legal/SecurityPolicyPage'
