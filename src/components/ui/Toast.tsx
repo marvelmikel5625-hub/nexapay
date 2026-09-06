@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+import { createContext, useState, ReactNode } from 'react'
 import { cn } from '../../utils/cn'
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react'
 
@@ -18,7 +18,7 @@ interface ToastContextType {
   clearToasts: () => void
 }
 
-const ToastContext = createContext<ToastContextType | undefined>(undefined)
+export const ToastContext = createContext<ToastContextType | undefined>(undefined)
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([])
@@ -50,12 +50,6 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       <ToastContainer toasts={toasts} removeToast={removeToast} />
     </ToastContext.Provider>
   )
-}
-
-export function useToast() {
-  const context = useContext(ToastContext)
-  if (!context) throw new Error('useToast must be used within a ToastProvider')
-  return context
 }
 
 interface ToastContainerProps {
@@ -131,4 +125,8 @@ function ToastItem({ toast, onClose }: ToastItemProps) {
       </button>
     </div>
   )
+}
+
+export function ToastContainerExport() {
+  return null
 }
