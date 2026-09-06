@@ -1,5 +1,3 @@
-import { TRANSFER_FEES, calculateTransferFee } from '../constants/fees'
-
 export interface FeeBreakdown {
   amount: number
   fee: number
@@ -9,7 +7,15 @@ export interface FeeBreakdown {
 
 export const feeService = {
   calculateTransferFee(amount: number): number {
-    return calculateTransferFee(amount)
+    // Fee tiers in kobo
+    if (amount === 0) return 0
+    if (amount <= 500000) return 1000 // ₦10
+    if (amount <= 2000000) return 1500 // ₦15
+    if (amount <= 5000000) return 2500 // ₦25
+    if (amount <= 10000000) return 5000 // ₦50
+    if (amount <= 50000000) return 10000 // ₦100
+    if (amount <= 100000000) return 15000 // ₦150
+    return 25000 // ₦250
   },
 
   calculateDiscount(amount: number, percentage: number): number {
