@@ -1,7 +1,6 @@
 import { walletService } from './wallet.service'
 import { transactionService } from './transaction.service'
-import { calculateTransferFee } from '../constants/fees'
-import { LIMITS } from '../constants/limits'
+import { feeService } from './fee.service'
 
 export const transferService = {
   async validateTransfer(
@@ -11,25 +10,24 @@ export const transferService = {
     pin: string
   ): Promise<{ valid: boolean; error?: string }> {
     // Validate amount
-    if (amount < LIMITS.MIN_TRANSFER_AMOUNT) {
-      return { valid: false, error: `Minimum transfer amount is ₦${LIMITS.MIN_TRANSFER_AMOUNT / 100}` }
+    if (amount < 100) {
+      return { valid: false, error: 'Minimum transfer amount is ₦1.00' }
     }
 
-    if (amount > LIMITS.MAX_TRANSFER_AMOUNT) {
-      return { valid: false, error: `Maximum transfer amount is ₦${LIMITS.MAX_TRANSFER_AMOUNT / 100}` }
+    if (amount > 500000000) {
+      return { valid: false, error: 'Maximum transfer amount is ₦5,000,000' }
     }
 
     // Check sender balance
     const balance = await walletService.getBalance(senderId)
-    const fee = calculateTransferFee(amount)
+    const fee = feeService.calculateTransferFee(amount)
     const total = amount + fee
 
     if (balance < total) {
       return { valid: false, error: 'Insufficient balance' }
     }
 
-    // Validate PIN (in production, this would check against stored hash)
-    // For demo, we'll check if PIN is "1234" (in production, use secure verification)
+    // Validate PIN (demo: accept 1234)
     if (pin !== '1234') {
       return { valid: false, error: 'Invalid transaction PIN' }
     }
@@ -43,7 +41,7 @@ export const transferService = {
     amount: number,
     description: string
   ) {
-    const fee = calculateTransferFee(amount)
+    const fee = feeService.calculateTransferFee(amount)
     const total = amount + fee
 
     // Create transaction record
@@ -59,15 +57,13 @@ export const transferService = {
       metadata: { sender_id: senderId, recipient_id: recipientId },
     })
 
-    // Process the transfer (in production, this would be more complex)
-    // For demo, we'll simulate success
     try {
       await transactionService.processTransaction(transaction.id)
 
       // Debit sender
       await walletService.debitWallet(senderId, total, transaction.reference)
 
-      // Credit recipient (in a real system, this would be a separate account)
+      // Credit recipient
       await walletService.creditWallet(recipientId, amount, transaction.reference)
 
       // Complete transaction
@@ -81,6 +77,6 @@ export const transferService = {
   },
 
   async getTransferFee(amount: number): Promise<number> {
-    return calculateTransferFee(amount)
+    return feeService.calculateTransferFee(amount)
   },
 }
