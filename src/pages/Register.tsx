@@ -15,7 +15,6 @@ export function Register() {
     password: '',
     confirmPassword: ''
   })
-
   const [passwordStrength, setPasswordStrength] = useState(0)
   const [passwordChecks, setPasswordChecks] = useState({
     length: false,
@@ -25,6 +24,7 @@ export function Register() {
     special: false
   })
 
+  // Check password strength
   useEffect(() => {
     const pwd = formData.password
     const checks = {
@@ -35,7 +35,7 @@ export function Register() {
       special: /[^A-Za-z0-9]/.test(pwd)
     }
     setPasswordChecks(checks)
-    
+
     let score = 0
     if (checks.length) score++
     if (checks.uppercase) score++
@@ -45,23 +45,21 @@ export function Register() {
     setPasswordStrength(score)
   }, [formData.password])
 
-  const getStrengthLabel = (score: number) => {
-    if (score === 0) return { label: 'Enter a password', color: 'text-gray-400' }
-    if (score <= 2) return { label: 'Weak', color: 'text-red-500' }
-    if (score <= 3) return { label: 'Fair', color: 'text-amber-500' }
-    if (score <= 4) return { label: 'Good', color: 'text-blue-500' }
+  const getStrengthLabel = () => {
+    if (passwordStrength === 0) return { label: 'Enter a password', color: 'text-gray-400' }
+    if (passwordStrength <= 2) return { label: 'Weak', color: 'text-red-500' }
+    if (passwordStrength <= 3) return { label: 'Fair', color: 'text-amber-500' }
+    if (passwordStrength <= 4) return { label: 'Good', color: 'text-blue-500' }
     return { label: 'Strong', color: 'text-emerald-500' }
   }
 
-  const getStrengthColor = (score: number) => {
-    if (score === 0) return 'bg-gray-200'
-    if (score <= 2) return 'bg-red-500'
-    if (score <= 3) return 'bg-amber-500'
-    if (score <= 4) return 'bg-blue-500'
+  const getStrengthColor = () => {
+    if (passwordStrength === 0) return 'bg-gray-200'
+    if (passwordStrength <= 2) return 'bg-red-500'
+    if (passwordStrength <= 3) return 'bg-amber-500'
+    if (passwordStrength <= 4) return 'bg-blue-500'
     return 'bg-emerald-500'
   }
-
-  const getStrengthWidth = (score: number) => `${(score / 5) * 100}%`
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -89,7 +87,7 @@ export function Register() {
     }, 1500)
   }
 
-  const strengthInfo = getStrengthLabel(passwordStrength)
+  const strengthInfo = getStrengthLabel()
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4">
@@ -114,6 +112,7 @@ export function Register() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Name Fields */}
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-sm font-medium text-[#0F172A] block mb-1.5">First name</label>
@@ -147,6 +146,7 @@ export function Register() {
               </div>
             </div>
 
+            {/* Email */}
             <div>
               <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Email Address</label>
               <div className="relative">
@@ -163,6 +163,7 @@ export function Register() {
               </div>
             </div>
 
+            {/* Phone */}
             <div>
               <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Phone Number</label>
               <div className="relative">
@@ -179,6 +180,7 @@ export function Register() {
               </div>
             </div>
 
+            {/* Password */}
             <div>
               <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Password</label>
               <div className="relative">
@@ -201,6 +203,7 @@ export function Register() {
                 </button>
               </div>
 
+              {/* Password Strength */}
               {formData.password.length > 0 && (
                 <div className="mt-2">
                   <div className="flex items-center justify-between mb-1">
@@ -211,8 +214,8 @@ export function Register() {
                   </div>
                   <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
                     <div 
-                      className={`h-full transition-all duration-500 ${getStrengthColor(passwordStrength)}`}
-                      style={{ width: getStrengthWidth(passwordStrength) }}
+                      className={`h-full transition-all duration-500 ${getStrengthColor()}`}
+                      style={{ width: `${(passwordStrength / 5) * 100}%` }}
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-1 mt-2 text-xs">
@@ -241,6 +244,7 @@ export function Register() {
               )}
             </div>
 
+            {/* Confirm Password */}
             <div>
               <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Confirm Password</label>
               <div className="relative">
@@ -251,13 +255,7 @@ export function Register() {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm your password"
-                  className={`w-full pl-10 pr-12 py-3 rounded-xl border ${
-                    formData.confirmPassword && formData.password !== formData.confirmPassword
-                      ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20'
-                      : formData.confirmPassword && formData.password === formData.confirmPassword
-                      ? 'border-emerald-400 focus:border-emerald-500 focus:ring-emerald-500/20'
-                      : 'border-gray-200 focus:border-[#00a86b] focus:ring-[#00a86b]/20'
-                  } focus:outline-none focus:ring-2 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400`}
+                  className="w-full pl-10 pr-12 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400"
                   required
                 />
                 <button
@@ -269,9 +267,7 @@ export function Register() {
                 </button>
               </div>
               {formData.confirmPassword && (
-                <p className={`text-xs mt-1 ${
-                  formData.password === formData.confirmPassword ? 'text-emerald-500' : 'text-red-500'
-                }`}>
+                <p className={`text-xs mt-1 ${formData.password === formData.confirmPassword ? 'text-emerald-500' : 'text-red-500'}`}>
                   {formData.password === formData.confirmPassword ? '✅ Passwords match' : '❌ Passwords do not match'}
                 </p>
               )}
