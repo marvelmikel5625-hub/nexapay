@@ -4,7 +4,6 @@ import {
   Send, 
   CreditCard, 
   Phone, 
-  Wifi, 
   Shield, 
   Menu,
   X,
@@ -33,7 +32,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       
-      {/* ========== HEADER ========== */}
+      {/* HEADER */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled 
           ? 'bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-100/50' 
@@ -114,7 +113,7 @@ function App() {
         )}
       </header>
 
-      {/* ========== HERO SECTION ========== */}
+      {/* HERO SECTION */}
       <section className="relative pt-28 md:pt-36 pb-16 md:pb-24 px-4 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#2563EB]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#7C3AED]/5 rounded-full blur-3xl"></div>
@@ -122,7 +121,7 @@ function App() {
         <div className="max-w-7xl mx-auto relative">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
             
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#2563EB]/10 rounded-full text-[#2563EB] text-sm font-medium border border-[#2563EB]/10">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
@@ -203,7 +202,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== FEATURES SECTION ========== */}
+      {/* FEATURES SECTION */}
       <section id="features" className="py-16 md:py-24 px-4 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -255,7 +254,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== TESTIMONIAL SECTION ========== */}
+      {/* TESTIMONIAL SECTION */}
       <section className="py-16 md:py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -307,9 +306,8 @@ function App() {
         </div>
       </section>
 
-      {/* ========== CTA SECTION ========== */}
+      {/* CTA SECTION - NEW COLOR */}
       <section className="relative py-16 md:py-24 px-4 overflow-hidden">
-        {/* NEW: Purple → Blue → Purple gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED] via-[#2563EB] to-[#7C3AED]"></div>
         <div className="absolute inset-0 opacity-20" style={{
           backgroundImage: `radial-gradient(circle at 20% 50%, #ffffff 0%, transparent 50%), radial-gradient(circle at 80% 50%, #ffffff 0%, transparent 50%)`
@@ -350,7 +348,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== FOOTER ========== */}
+      {/* FOOTER - NEW COLOR */}
       <footer className="bg-[#1A1A2E] text-white/60 py-12 px-4 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 border-b border-white/5">
