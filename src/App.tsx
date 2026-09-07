@@ -13,8 +13,7 @@ import {
   Sparkles,
   Zap,
   Users,
-  Globe,
-  Star
+  Globe
 } from 'lucide-react'
 
 function App() {
@@ -257,7 +256,7 @@ function App() {
               }
             ].map((feature, index) => (
               <div key={index} className="group bg-white rounded-2xl p-6 shadow-soft hover:shadow-strong transition-all duration-300 hover:-translate-y-2 border border-gray-50">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 text-white shadow-lg shadow-${feature.color.split(' ')[1]}/20`}>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} bg-opacity-10 flex items-center justify-center mb-4 text-white`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-lg font-semibold text-[#0F172A]">{feature.title}</h3>
@@ -282,13 +281,8 @@ function App() {
                   I can now pay bills and buy airtime in seconds.
                 </p>
                 <div className="mt-6 flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#2563EB] shadow-lg shadow-blue-500/20">
-                    <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face&auto=format"
-                      alt="Michael Adebayo"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center text-white font-bold text-lg">
+                    MA
                   </div>
                   <div>
                     <p className="font-semibold text-[#0F172A]">Michael Adebayo</p>
@@ -297,7 +291,7 @@ function App() {
                 </div>
                 <div className="flex mt-4">
                   {[1,2,3,4,5].map((star) => (
-                    <Star key={star} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <span key={star} className="text-amber-400 text-lg">★</span>
                   ))}
                 </div>
               </div>
@@ -308,8 +302,8 @@ function App() {
                 <div className="absolute -inset-4 bg-gradient-to-br from-[#7C3AED]/20 to-[#2563EB]/20 rounded-3xl blur-2xl"></div>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=500&fit=crop&crop=center"
-                    alt="Person using NexaPay app on phone"
+                    src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400&h=500&fit=crop&crop=center"
+                    alt="Happy user"
                     className="w-full object-cover aspect-[4/5]"
                     loading="lazy"
                   />
