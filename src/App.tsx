@@ -29,12 +29,12 @@ function App() {
 
   return (
     <div>
-      {/* Top Bar */}
+      {/* ========== TOP BAR ========== */}
       <div className="bar">
         NexaPay <b>•</b> A simpler way to manage everyday payments.
       </div>
 
-      {/* Navigation */}
+      {/* ========== NAVIGATION ========== */}
       <header className={`nav ${isMenuOpen ? 'open' : ''}`} id="nav">
         <div className="wrap navin">
           <a className="logo" href="#">
@@ -57,7 +57,7 @@ function App() {
         </div>
       </header>
 
-      {/* Hero */}
+      {/* ========== HERO ========== */}
       <section className="hero">
         <div className="wrap heroGrid">
           <div className="reveal">
@@ -113,7 +113,7 @@ function App() {
         </div>
       </section>
 
-      {/* Marquee */}
+      {/* ========== MARQUEE ========== */}
       <section className="marqueeSec">
         <div className="marqueeTitle">Built around the services Nigerians use every day</div>
         <div className="marqueeBox">
@@ -142,7 +142,7 @@ function App() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* ========== FEATURES ========== */}
       <section className="section" id="features">
         <div className="wrap">
           <div className="intro reveal">
@@ -156,6 +156,7 @@ function App() {
             </div>
           </div>
 
+          {/* Send Money */}
           <div className="service reveal">
             <div className="copy">
               <div className="kicker">Send money</div>
@@ -177,6 +178,7 @@ function App() {
             </div>
           </div>
 
+          {/* Airtime & Data - WITH REAL LOGOS */}
           <div className="service reverse reveal">
             <div className="copy">
               <div className="kicker">Airtime & data</div>
@@ -190,14 +192,70 @@ function App() {
             </div>
             <div className="visual">
               <div className="networks">
-                <div className="network">M &nbsp; MTN</div>
-                <div className="network">A &nbsp; Airtel</div>
-                <div className="network">G &nbsp; Glo</div>
-                <div className="network">9 &nbsp; 9mobile</div>
+                {/* MTN - Yellow */}
+                <div className="network" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px',
+                  borderLeft: '4px solid #FFCD00',
+                  background: '#fff'
+                }}>
+                  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect width="36" height="36" rx="8" fill="#FFCD00"/>
+                    <text x="18" y="24" fontFamily="Arial, sans-serif" fontSize="14" fontWeight="900" fill="#000" textAnchor="middle">MTN</text>
+                  </svg>
+                  <span style={{ fontWeight: '700' }}>MTN</span>
+                </div>
+                
+                {/* Airtel - Red */}
+                <div className="network" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px',
+                  borderLeft: '4px solid #FF0000',
+                  background: '#fff'
+                }}>
+                  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect width="36" height="36" rx="8" fill="#FF0000"/>
+                    <text x="18" y="24" fontFamily="Arial, sans-serif" fontSize="11" fontWeight="900" fill="#FFF" textAnchor="middle">AIRTEL</text>
+                  </svg>
+                  <span style={{ fontWeight: '700' }}>Airtel</span>
+                </div>
+                
+                {/* Glo - Green */}
+                <div className="network" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px',
+                  borderLeft: '4px solid #008000',
+                  background: '#fff'
+                }}>
+                  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect width="36" height="36" rx="8" fill="#008000"/>
+                    <text x="18" y="24" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="900" fill="#FFF" textAnchor="middle">GLO</text>
+                  </svg>
+                  <span style={{ fontWeight: '700' }}>Glo</span>
+                </div>
+                
+                {/* 9mobile - Purple */}
+                <div className="network" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px',
+                  borderLeft: '4px solid #800080',
+                  background: '#fff'
+                }}>
+                  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                    <rect width="36" height="36" rx="8" fill="#800080"/>
+                    <text x="18" y="24" fontFamily="Arial, sans-serif" fontSize="10" fontWeight="900" fill="#FFF" textAnchor="middle">9mobile</text>
+                  </svg>
+                  <span style={{ fontWeight: '700' }}>9mobile</span>
+                </div>
               </div>
             </div>
           </div>
 
+          {/* Bills */}
           <div className="service reveal">
             <div className="copy">
               <div className="kicker">Bills</div>
@@ -221,7 +279,7 @@ function App() {
         </div>
       </section>
 
-      {/* Built for Nigeria */}
+      {/* ========== BUILT FOR NIGERIA ========== */}
       <section className="section dark">
         <div className="wrap eco">
           <div className="reveal">
@@ -242,7 +300,7 @@ function App() {
         </div>
       </section>
 
-      {/* Security */}
+      {/* ========== SECURITY ========== */}
       <section className="section" id="security">
         <div className="wrap">
           <div className="head reveal">
@@ -283,7 +341,7 @@ function App() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* ========== HOW IT WORKS ========== */}
       <section className="section soft" id="how">
         <div className="wrap">
           <div className="head reveal">
@@ -311,7 +369,7 @@ function App() {
         </div>
       </section>
 
-      {/* Testimonial */}
+      {/* ========== TESTIMONIAL ========== */}
       <section className="section">
         <div className="wrap testimonial">
           <div className="photo reveal">
@@ -326,7 +384,7 @@ function App() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* ========== FAQ ========== */}
       <section className="section soft" id="faq">
         <div className="wrap">
           <div className="head reveal">
@@ -362,24 +420,61 @@ function App() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ========== CTA ========== */}
       <section className="cta" id="start">
         <div className="wrap">
-          <div className="ctaBox reveal">
+          <div className="ctaBox reveal" style={{ 
+            background: 'linear-gradient(135deg, #0d241c, #124331)',
+            borderRadius: '34px',
+            padding: '60px 40px',
+            textAlign: 'center'
+          }}>
             <div>
               <div className="kicker" style={{ color: '#72e6b5' }}>Ready when you are</div>
-              <h2>Make everyday payments simpler.</h2>
-              <p>One focused experience for sending money, staying connected and taking care of everyday bills.</p>
-            </div>
-            <div className="actions">
-              <a className="btn outline" href="#login">Log in</a>
-              <a className="btn primary" href="#">Get started →</a>
+              <h2 style={{ color: '#fff', fontSize: 'clamp(32px, 4vw, 48px)' }}>
+                Make everyday payments simpler.
+              </h2>
+              <p style={{ color: '#b8cec4', maxWidth: '600px', margin: '16px auto' }}>
+                One focused experience for sending money, staying connected and taking care of everyday bills.
+              </p>
+              
+              {/* Trust Badges */}
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                gap: '24px', 
+                flexWrap: 'wrap',
+                marginBottom: '30px',
+                fontSize: '14px',
+                color: '#b8cec4'
+              }}>
+                <span>✅ Free to start</span>
+                <span>✅ No hidden fees</span>
+                <span>✅ Cancel anytime</span>
+              </div>
+              
+              <div className="actions" style={{ justifyContent: 'center' }}>
+                <a className="btn outline" href="#login" style={{ 
+                  borderColor: 'rgba(255,255,255,0.3)', 
+                  color: '#fff',
+                  background: 'transparent'
+                }}>
+                  Log in
+                </a>
+                <a className="btn primary" href="#" style={{ 
+                  background: 'var(--g)',
+                  color: '#fff',
+                  boxShadow: '0 10px 25px #00a86b2e'
+                }}>
+                  Get started →
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* ========== FOOTER ========== */}
       <footer className="footer" id="login">
         <div className="wrap">
           <div className="footGrid">
