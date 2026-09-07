@@ -1,549 +1,431 @@
-import { useState, useEffect } from 'react'
-import { 
-  ArrowRight, 
-  Send, 
-  CreditCard, 
-  Phone, 
-  Shield, 
-  Menu,
-  X,
-  ChevronDown,
-  Sparkles,
-  Zap,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-  Check,
-  Users,
-  TrendingUp,
-  Clock,
-  HelpCircle,
-  Plus,
-  Minus
-} from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [faqOpen, setFaqOpen] = useState<number | null>(null)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const scrollToFeatures = () => {
-    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })
+  // Toggle FAQ
+  const toggleFaq = (index: number) => {
+    setFaqOpen(faqOpen === index ? null : index)
   }
 
+  // Scroll reveal effect
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show')
+          }
+        })
+      },
+      { threshold: 0.12 }
+    )
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header isScrolled={isScrolled} isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <Hero scrollToFeatures={scrollToFeatures} />
-      <TrustedCompanies />
-      <Features />
-      <HowItWorks />
-      <Stats />
-      <Testimonials />
-      <Pricing />
-      <FAQ />
-      <CTA />
-      <Footer />
+    <div className="nexapay-app">
+
+      {/* ========== TOP BAR ========== */}
+      <div className="bar">
+        NexaPay <b>•</b> A simpler way to manage everyday payments.
+      </div>
+
+      {/* ========== HEADER ========== */}
+      <header className={`nav ${isMenuOpen ? 'open' : ''}`} id="nav">
+        <div className="wrap navin">
+          <a className="logo" href="#">
+            <span className="mark">N</span>
+            NexaPay
+          </a>
+          <nav className="links">
+            <a href="#features">Features</a>
+            <a href="#security">Security</a>
+            <a href="#how">How it works</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+          <div className="actions">
+            <a className="btn outline" href="#login">Log in</a>
+            <a className="btn primary" href="#start">Get started</a>
+          </div>
+          <button className="menu" id="menu" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            ☰
+          </button>
+        </div>
+      </header>
+
+      {/* ========== HERO ========== */}
+      <section className="hero">
+        <div className="wrap heroGrid">
+          <div className="reveal">
+            <div className="pill">
+              <i></i>Payments made simple
+            </div>
+            <h1>The simpler way to move your money.</h1>
+            <p>Send money, pay bills, buy airtime and data, and manage everyday payments through one simple experience designed around Nigeria.</p>
+            <div className="heroBtns">
+              <a className="btn primary" href="#start">Get started →</a>
+              <a className="btn outline" href="#features">Explore NexaPay</a>
+            </div>
+            <div className="points">
+              <span>Fast payments</span>
+              <span>Secure access</span>
+              <span>Built for Nigeria</span>
+            </div>
+          </div>
+          <div className="art reveal">
+            <div className="glow"></div>
+            <div className="float f1">
+              ↗ <b>Transfer complete</b>
+              <small>Payment processed successfully</small>
+            </div>
+            <div className="phone">
+              <div className="screen">
+                <div className="top">
+                  <b>NexaPay</b>
+                  <span>•••</span>
+                </div>
+                <div className="balance">
+                  <small>Available balance</small>
+                  <strong>₦248,500</strong>
+                </div>
+                <div className="quick">
+                  <div><b>↗</b>Send</div>
+                  <div><b>＋</b>Add</div>
+                  <div><b>▣</b>Bills</div>
+                </div>
+                <div className="activity">
+                  <h4>Recent activity</h4>
+                  <div className="row">↗ Bank transfer <strong>−₦15,000</strong></div>
+                  <div className="row">◉ Airtime <strong>−₦2,000</strong></div>
+                  <div className="row">＋ Money received <strong>+₦40,000</strong></div>
+                </div>
+              </div>
+            </div>
+            <div className="float f2">
+              ✓ <b>Payment secured</b>
+              <small>Transaction verified</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== MARQUEE ========== */}
+      <section className="marqueeSec">
+        <div className="marqueeTitle">Built around the services Nigerians use every day</div>
+        <div className="marqueeBox">
+          <div className="marquee">
+            <div className="group">
+              <span className="brand">MTN</span>
+              <span className="brand">AIRTEL</span>
+              <span className="brand">GLO</span>
+              <span className="brand">9MOBILE</span>
+              <span className="brand">DStv</span>
+              <span className="brand">GOtv</span>
+              <span className="brand">STARTIMES</span>
+              <span className="brand">ELECTRICITY</span>
+            </div>
+            <div className="group">
+              <span className="brand">MTN</span>
+              <span className="brand">AIRTEL</span>
+              <span className="brand">GLO</span>
+              <span className="brand">9MOBILE</span>
+              <span className="brand">DStv</span>
+              <span className="brand">GOtv</span>
+              <span className="brand">STARTIMES</span>
+              <span className="brand">ELECTRICITY</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== FEATURES ========== */}
+      <section className="section" id="features">
+        <div className="wrap">
+          <div className="intro reveal">
+            <div>
+              <div className="kicker">One place for everyday payments</div>
+              <h2>Everything you need. Nothing you don't.</h2>
+            </div>
+            <div className="stat">
+              <strong>01</strong><br />
+              Focused payment flows that keep common money tasks simple and clear.
+            </div>
+          </div>
+
+          {/* Send Money */}
+          <div className="service reveal">
+            <div className="copy">
+              <div className="kicker">Send money</div>
+              <h3>Move money without unnecessary steps.</h3>
+              <p>Send money to people and bank accounts with a straightforward flow that keeps the recipient, amount and status clear.</p>
+              <ul>
+                <li>Simple transfer flow</li>
+                <li>Clear transaction status</li>
+                <li>Designed for Nigerian payments</li>
+              </ul>
+            </div>
+            <div className="visual">
+              <div className="card">
+                <b>Send money</b>
+                <div className="vrow">01 &nbsp; Choose recipient <b>✓</b></div>
+                <div className="vrow">02 &nbsp; Enter amount <b>✓</b></div>
+                <div className="vrow">03 &nbsp; Confirm payment <b>✓</b></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Airtime & Data */}
+          <div className="service reverse reveal">
+            <div className="copy">
+              <div className="kicker">Airtime & data</div>
+              <h3>Stay connected in just a few taps.</h3>
+              <p>Choose your network, select an amount or bundle, confirm your details and get back online.</p>
+              <ul>
+                <li>Major Nigerian networks</li>
+                <li>Flexible airtime and data options</li>
+                <li>Fast confirmation</li>
+              </ul>
+            </div>
+            <div className="visual">
+              <div className="networks">
+                <div className="network">M &nbsp; MTN</div>
+                <div className="network">A &nbsp; Airtel</div>
+                <div className="network">G &nbsp; Glo</div>
+                <div className="network">9 &nbsp; 9mobile</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bills */}
+          <div className="service reveal">
+            <div className="copy">
+              <div className="kicker">Bills</div>
+              <h3>Take care of bills from one place.</h3>
+              <p>Handle everyday bills with a clear experience that helps you review the service, amount and payment status before finishing.</p>
+              <ul>
+                <li>Electricity payments</li>
+                <li>TV subscriptions</li>
+                <li>Clear receipts and status</li>
+              </ul>
+            </div>
+            <div className="visual">
+              <div className="bill">
+                <small>Electricity · Prepaid</small>
+                <h3>₦25,000</h3>
+                <small>Electricity payment</small>
+                <div className="pay">Continue securely →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== BUILT FOR NIGERIA ========== */}
+      <section className="section dark">
+        <div className="wrap eco">
+          <div className="reveal">
+            <div className="kicker" style={{ color: '#72e6b5' }}>Built for Nigeria</div>
+            <h2>One simple experience for the way you pay.</h2>
+            <p className="lead">NexaPay brings everyday payment tasks into one focused ecosystem, so you spend less time moving between different services.</p>
+          </div>
+          <div className="orbit reveal">
+            <div className="ring r2"></div>
+            <div className="ring r1"></div>
+            <div className="core">NexaPay</div>
+            <span className="tag t1">Send money</span>
+            <span className="tag t2">Airtime</span>
+            <span className="tag t3">Data</span>
+            <span className="tag t4">Electricity</span>
+            <span className="tag t5">TV & bills</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== SECURITY ========== */}
+      <section className="section" id="security">
+        <div className="wrap">
+          <div className="head reveal">
+            <div className="kicker">Security first</div>
+            <h2>Your money deserves a careful experience.</h2>
+            <p className="lead">NexaPay is designed with security-conscious account and transaction flows while keeping important actions easy to understand.</p>
+          </div>
+          <div className="security">
+            <div className="securityMain reveal">
+              <div className="shield">⌾</div>
+              <div className="kicker" style={{ color: '#72e6b5' }}>Designed with protection in mind</div>
+              <h2 style={{ fontSize: '38px' }}>Security should feel invisible — not complicated.</h2>
+              <p>From account access to transaction confirmation, important actions are designed to be clear and deliberate.</p>
+            </div>
+            <div className="secCards">
+              <div className="sec reveal">
+                <div className="secIcon">⌁</div>
+                <h3>Secure access</h3>
+                <p>Verification steps can help protect sensitive account actions.</p>
+              </div>
+              <div className="sec reveal">
+                <div className="secIcon">✓</div>
+                <h3>Confirmation</h3>
+                <p>Important payments show clear details before confirmation.</p>
+              </div>
+              <div className="sec reveal">
+                <div className="secIcon">◉</div>
+                <h3>Clear status</h3>
+                <p>Know whether a payment is successful, pending or needs attention.</p>
+              </div>
+              <div className="sec reveal">
+                <div className="secIcon">↻</div>
+                <h3>Safer by design</h3>
+                <p>Critical flows are structured to reduce accidental actions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== HOW IT WORKS ========== */}
+      <section className="section soft" id="how">
+        <div className="wrap">
+          <div className="head reveal">
+            <div className="kicker">How it works</div>
+            <h2>Simple from the first tap.</h2>
+            <p className="lead">A focused flow means less friction when you need to make an everyday payment.</p>
+          </div>
+          <div className="steps">
+            <div className="step reveal">
+              <small>01 / START</small>
+              <h3>Create your account</h3>
+              <p>Set up your details and secure access to your NexaPay experience.</p>
+            </div>
+            <div className="step reveal">
+              <small>02 / CHOOSE</small>
+              <h3>Pick what you need</h3>
+              <p>Send money, buy airtime or data, pay a bill, or review activity.</p>
+            </div>
+            <div className="step reveal">
+              <small>03 / CONFIRM</small>
+              <h3>Complete with confidence</h3>
+              <p>Review important details, confirm your action and track the result.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== TESTIMONIAL ========== */}
+      <section className="section">
+        <div className="wrap testimonial">
+          <div className="photo reveal">
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85" alt="Person using a digital payment service" />
+          </div>
+          <div className="reveal">
+            <div className="kicker">The NexaPay experience</div>
+            <div className="quote">“Payments should not feel like work. NexaPay is built to make everyday money tasks feel simple.”</div>
+            <b>NexaPay</b>
+            <div style={{ color: '#667085', fontSize: '12px' }}>Payments made simple</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== FAQ ========== */}
+      <section className="section soft" id="faq">
+        <div className="wrap">
+          <div className="head reveal">
+            <div className="kicker">Questions</div>
+            <h2>Frequently asked questions.</h2>
+          </div>
+          <div className="faq">
+            <div className={`faqItem reveal ${faqOpen === 0 ? 'open' : ''}`}>
+              <button className="faqQ" onClick={() => toggleFaq(0)}>
+                What is NexaPay?<span>{faqOpen === 0 ? '−' : '+'}</span>
+              </button>
+              <div className="faqA">
+                <p>NexaPay is a digital payments concept designed to bring transfers, airtime, data and bill payments into one simple experience.</p>
+              </div>
+            </div>
+            <div className={`faqItem reveal ${faqOpen === 1 ? 'open' : ''}`}>
+              <button className="faqQ" onClick={() => toggleFaq(1)}>
+                What can I use NexaPay for?<span>{faqOpen === 1 ? '−' : '+'}</span>
+              </button>
+              <div className="faqA">
+                <p>The product direction includes money transfers, airtime and data, electricity and TV payments, transaction history and account management.</p>
+              </div>
+            </div>
+            <div className={`faqItem reveal ${faqOpen === 2 ? 'open' : ''}`}>
+              <button className="faqQ" onClick={() => toggleFaq(2)}>
+                Is NexaPay available now?<span>{faqOpen === 2 ? '−' : '+'}</span>
+              </button>
+              <div className="faqA">
+                <p>This is the public-facing Phase 1 website. Live financial services depend on the production backend, integrations and required infrastructure.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== CTA ========== */}
+      <section className="cta" id="start">
+        <div className="wrap">
+          <div className="ctaBox reveal">
+            <div>
+              <div className="kicker" style={{ color: '#72e6b5' }}>Ready when you are</div>
+              <h2>Make everyday payments simpler.</h2>
+              <p>One focused experience for sending money, staying connected and taking care of everyday bills.</p>
+            </div>
+            <div className="actions">
+              <a className="btn outline" href="#login">Log in</a>
+              <a className="btn primary" href="#">Get started →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== FOOTER ========== */}
+      <footer className="footer" id="login">
+        <div className="wrap">
+          <div className="footGrid">
+            <div className="foot footBrand">
+              <a className="logo" href="#">
+                <span className="mark">N</span>
+                NexaPay
+              </a>
+              <p>Payments made simple. A modern digital payments experience designed around everyday life in Nigeria.</p>
+            </div>
+            <div className="foot">
+              <h4>Product</h4>
+              <a href="#features">Features</a>
+              <a href="#how">How it works</a>
+              <a href="#security">Security</a>
+              <a href="#">Pricing</a>
+            </div>
+            <div className="foot">
+              <h4>Company</h4>
+              <a href="#">About</a>
+              <a href="#">Contact</a>
+              <a href="#">Careers</a>
+            </div>
+            <div className="foot">
+              <h4>Resources</h4>
+              <a href="#faq">FAQs</a>
+              <a href="#">Help Center</a>
+              <a href="#">Privacy</a>
+              <a href="#">Terms</a>
+            </div>
+          </div>
+          <div className="bottom">
+            <span>© 2026 NexaPay. All rights reserved.</span>
+            <div>X &nbsp; ◎ &nbsp; in</div>
+          </div>
+        </div>
+      </footer>
+
     </div>
   )
 }
 
 export default App
-
-// ========== HEADER ==========
-function Header({ isScrolled, isMenuOpen, setIsMenuOpen }: any) {
-  return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-white/90 backdrop-blur-xl shadow-lg border-b border-gray-100/50' : 'bg-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <a href="/" className="flex items-center gap-2.5 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB] to-[#7C3AED] rounded-xl blur-md opacity-60 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#0F172A] via-[#2563EB] to-[#7C3AED] flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <span className="text-white font-bold text-sm">N</span>
-              </div>
-            </div>
-            <span className="text-xl font-bold text-[#0F172A] tracking-tight">NexaPay</span>
-          </a>
-          <nav className="hidden md:flex items-center gap-1">
-            <a href="#features" className="px-4 py-2 text-gray-600 hover:text-[#0F172A] transition-colors text-sm font-medium rounded-lg hover:bg-gray-50">Features</a>
-            <a href="#pricing" className="px-4 py-2 text-gray-600 hover:text-[#0F172A] transition-colors text-sm font-medium rounded-lg hover:bg-gray-50">Pricing</a>
-            <a href="#faq" className="px-4 py-2 text-gray-600 hover:text-[#0F172A] transition-colors text-sm font-medium rounded-lg hover:bg-gray-50">FAQ</a>
-            <div className="w-px h-6 bg-gray-200 mx-2"></div>
-            <a href="/login" className="px-5 py-2 text-[#0F172A] font-medium text-sm hover:text-[#2563EB] transition-colors rounded-lg hover:bg-gray-50">Log in</a>
-            <a href="/register" className="px-6 py-2.5 bg-gradient-to-r from-[#0F172A] via-[#2563EB] to-[#7C3AED] text-white rounded-xl font-medium text-sm hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 hover:-translate-y-0.5">Get Started</a>
-          </nav>
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden p-2.5 rounded-xl hover:bg-gray-100 transition-colors">
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
-      {isMenuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 px-4 py-6 shadow-lg">
-          <div className="flex flex-col space-y-1">
-            <a href="#features" className="px-4 py-3 text-gray-600 hover:text-[#0F172A] hover:bg-gray-50 rounded-xl transition-colors" onClick={() => setIsMenuOpen(false)}>Features</a>
-            <a href="#pricing" className="px-4 py-3 text-gray-600 hover:text-[#0F172A] hover:bg-gray-50 rounded-xl transition-colors" onClick={() => setIsMenuOpen(false)}>Pricing</a>
-            <a href="#faq" className="px-4 py-3 text-gray-600 hover:text-[#0F172A] hover:bg-gray-50 rounded-xl transition-colors" onClick={() => setIsMenuOpen(false)}>FAQ</a>
-            <div className="border-t border-gray-100 my-2"></div>
-            <a href="/login" className="px-4 py-3 text-[#0F172A] font-medium hover:bg-gray-50 rounded-xl transition-colors" onClick={() => setIsMenuOpen(false)}>Log in</a>
-            <a href="/register" className="px-4 py-3.5 text-center bg-gradient-to-r from-[#0F172A] via-[#2563EB] to-[#7C3AED] text-white rounded-xl font-medium shadow-lg shadow-blue-500/20" onClick={() => setIsMenuOpen(false)}>Get Started</a>
-          </div>
-        </div>
-      )}
-    </header>
-  )
-}
-
-// ========== HERO ==========
-function Hero({ scrollToFeatures }: any) {
-  const words = ['Send Money', 'Pay Bills', 'Buy Airtime', 'Get Data']
-  const [wordIndex, setWordIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % words.length)
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <section className="relative pt-28 md:pt-36 pb-16 md:pb-24 px-4 overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#2563EB]/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#7C3AED]/5 rounded-full blur-3xl"></div>
-      <div className="max-w-7xl mx-auto relative">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#2563EB]/10 rounded-full text-[#2563EB] text-sm font-medium border border-[#2563EB]/10">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2563EB]"></span>
-              </span>
-              Trusted by 10,000+ users
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0F172A] leading-[1.1] tracking-tight">
-              Modern digital{' '}
-              <span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">payments</span>{' '}
-              for Nigeria
-            </h1>
-            <p className="text-lg text-gray-500 leading-relaxed max-w-lg">
-              Instantly{' '}
-              <span className="text-[#2563EB] font-semibold animate-pulse">{words[wordIndex]}</span>
-              {' '}— all from one app. Join thousands of Nigerians enjoying seamless digital payments.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="/register" className="group px-8 py-3.5 bg-gradient-to-r from-[#0F172A] via-[#2563EB] to-[#7C3AED] text-white rounded-xl font-semibold hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2">
-                Get Started
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <button onClick={scrollToFeatures} className="px-8 py-3.5 border-2 border-gray-200 text-[#0F172A] rounded-xl font-semibold hover:border-[#2563EB] hover:bg-[#2563EB]/5 transition-all duration-300 flex items-center gap-2">
-                Learn More
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex gap-8 pt-4">
-              <div><p className="text-2xl font-bold text-[#0F172A]">10K+</p><p className="text-sm text-gray-500">Active Users</p></div>
-              <div><p className="text-2xl font-bold text-[#0F172A]">₦50M+</p><p className="text-sm text-gray-500">Transactions</p></div>
-              <div><p className="text-2xl font-bold text-[#0F172A]">4.9★</p><p className="text-sm text-gray-500">User Rating</p></div>
-            </div>
-          </div>
-          <div className="relative flex justify-center">
-            <div className="relative w-full max-w-md">
-              <div className="absolute -inset-4 bg-gradient-to-br from-[#2563EB]/20 to-[#7C3AED]/20 rounded-3xl blur-2xl"></div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?w=600&h=600&fit=crop&crop=center" alt="Person using NexaPay app" className="w-full object-cover aspect-square" loading="lazy" />
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur rounded-xl px-4 py-2 shadow-lg flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center"><Sparkles className="w-4 h-4 text-emerald-500" /></div>
-                  <div><p className="text-xs font-medium text-[#0F172A]">Instant Transfer</p><p className="text-[10px] text-gray-500">~2 seconds</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== TRUSTED COMPANIES ==========
-const companies = [
-  { name: 'Flutterwave', bg: 'bg-purple-50', icon: '💳' },
-  { name: 'Paystack', bg: 'bg-blue-50', icon: '💼' },
-  { name: 'Stripe', bg: 'bg-indigo-50', icon: '⚡' },
-  { name: 'GTBank', bg: 'bg-orange-50', icon: '🏦' },
-  { name: 'MTN Nigeria', bg: 'bg-yellow-50', icon: '📱' },
-  { name: 'Airtel', bg: 'bg-red-50', icon: '📶' },
-  { name: 'Glo', bg: 'bg-green-50', icon: '🌐' },
-]
-
-function TrustedCompanies() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isHovering, setIsHovering] = useState(false)
-
-  useEffect(() => {
-    if (isHovering) return
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % companies.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [isHovering])
-
-  const goToSlide = (index: number) => setCurrentIndex(index)
-  const goToPrev = () => setCurrentIndex((prev) => (prev - 1 + companies.length) % companies.length)
-  const goToNext = () => setCurrentIndex((prev) => (prev + 1) % companies.length)
-
-  const getVisibleLogos = () => {
-    const visible = []
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % companies.length
-      visible.push(companies[index])
-    }
-    return visible
-  }
-
-  return (
-    <section className="py-16 md:py-20 px-4 bg-[#F8FAFC]">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-[#2563EB] font-semibold text-sm uppercase tracking-wider">Trusted By</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mt-2">Leading Companies & Brands</h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">NexaPay is trusted by thousands of businesses and individuals across Nigeria.</p>
-        </div>
-        <div className="relative" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-          <button onClick={goToPrev} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 -ml-4 md:-ml-6">
-            <ChevronLeft className="w-5 h-5 text-[#0F172A]" />
-          </button>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 px-8 md:px-12">
-            {getVisibleLogos().map((company, index) => (
-              <div key={index} className="group bg-white rounded-2xl p-8 shadow-soft hover:shadow-strong transition-all duration-500 hover:-translate-y-2 border border-gray-100">
-                <div className="flex flex-col items-center text-center">
-                  <div className={`w-16 h-16 rounded-2xl ${company.bg} flex items-center justify-center mb-4 text-3xl group-hover:scale-110 transition-transform duration-300`}>{company.icon}</div>
-                  <h3 className="text-lg font-semibold text-[#0F172A]">{company.name}</h3>
-                  <p className="text-sm text-gray-400 mt-1">Trusted Partner</p>
-                  <div className="flex mt-3 gap-1">{[1,2,3,4,5].map((star) => (<Star key={star} className="w-3 h-3 fill-amber-400 text-amber-400" />))}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button onClick={goToNext} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300 -mr-4 md:-mr-6">
-            <ChevronRight className="w-5 h-5 text-[#0F172A]" />
-          </button>
-        </div>
-        <div className="flex justify-center gap-2 mt-8">
-          {companies.map((_, index) => (
-            <button key={index} onClick={() => goToSlide(index)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-[#2563EB] w-8' : 'bg-gray-300 hover:bg-gray-400'}`} />
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white rounded-full border border-gray-100 shadow-soft">
-            <span className="text-2xl">⭐</span>
-            <span className="text-sm font-medium text-[#0F172A]">Trusted by 10,000+ businesses & individuals</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== FEATURES ==========
-function Features() {
-  const features = [
-    { icon: <Send className="w-6 h-6" />, title: 'Send Money', description: 'Transfer money instantly to anyone, anywhere in Nigeria.', color: 'from-blue-500 to-blue-600' },
-    { icon: <CreditCard className="w-6 h-6" />, title: 'Pay Bills', description: 'Pay electricity, TV, and other bills in seconds.', color: 'from-purple-500 to-purple-600' },
-    { icon: <Phone className="w-6 h-6" />, title: 'Airtime & Data', description: 'Buy airtime and data bundles for all networks instantly.', color: 'from-cyan-500 to-cyan-600' },
-    { icon: <Shield className="w-6 h-6" />, title: 'Secure & Safe', description: 'Your money is protected with bank-grade security.', color: 'from-emerald-500 to-emerald-600' }
-  ]
-
-  return (
-    <section id="features" className="py-16 md:py-24 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-[#2563EB] font-semibold text-sm uppercase tracking-wider">Features</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mt-2">Why choose NexaPay?</h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">Everything you need to manage your money, all in one place.</p>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <div key={index} className="group bg-white rounded-2xl p-6 shadow-soft hover:shadow-strong transition-all duration-300 hover:-translate-y-2 border border-gray-50">
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 text-white shadow-lg`}>{feature.icon}</div>
-              <h3 className="text-lg font-semibold text-[#0F172A]">{feature.title}</h3>
-              <p className="text-gray-500 text-sm mt-2">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== HOW IT WORKS ==========
-function HowItWorks() {
-  const steps = [
-    { icon: '📱', title: 'Download App', description: 'Get NexaPay from the app store or use our web app.' },
-    { icon: '💰', title: 'Add Money', description: 'Fund your wallet via bank transfer, card, or other methods.' },
-    { icon: '🚀', title: 'Start Transacting', description: 'Send money, pay bills, buy airtime & data instantly.' }
-  ]
-
-  return (
-    <section className="py-16 md:py-24 px-4 bg-[#F8FAFC]">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-[#2563EB] font-semibold text-sm uppercase tracking-wider">How It Works</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mt-2">Get started in 3 simple steps</h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">From sign-up to your first transaction in minutes.</p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {steps.map((step, index) => (
-            <div key={index} className="relative text-center">
-              {index < 2 && <div className="hidden md:block absolute top-12 left-[60%] w-[40%] h-0.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED]"></div>}
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center text-3xl mx-auto mb-4 shadow-lg shadow-blue-500/20">{step.icon}</div>
-              <h3 className="text-xl font-semibold text-[#0F172A]">Step {index + 1}</h3>
-              <h4 className="text-lg font-medium text-[#0F172A] mt-1">{step.title}</h4>
-              <p className="text-gray-500 text-sm mt-2">{step.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== STATS ==========
-function Stats() {
-  const [counts, setCounts] = useState({ users: 0, transactions: 0, rating: 0 })
-  const [started, setStarted] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const element = document.getElementById('stats')
-      if (element) {
-        const rect = element.getBoundingClientRect()
-        if (rect.top < window.innerHeight && !started) {
-          setStarted(true)
-        }
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [started])
-
-  useEffect(() => {
-    if (!started) return
-    const duration = 2000
-    const interval = 50
-    const steps = duration / interval
-    let currentStep = 0
-    const targetUsers = 10000
-    const targetTransactions = 50000000
-    const targetRating = 49
-
-    const timer = setInterval(() => {
-      currentStep++
-      const progress = currentStep / steps
-      setCounts({
-        users: Math.min(Math.round(targetUsers * progress), targetUsers),
-        transactions: Math.min(Math.round(targetTransactions * progress), targetTransactions),
-        rating: Math.min(Math.round(targetRating * progress) / 10, 4.9)
-      })
-      if (currentStep >= steps) {
-        clearInterval(timer)
-      }
-    }, interval)
-    return () => clearInterval(timer)
-  }, [started])
-
-  const stats = [
-    { value: counts.users.toLocaleString() + '+', label: 'Active Users', icon: <Users className="w-6 h-6" /> },
-    { value: '₦' + (counts.transactions / 1000000).toFixed(1) + 'M+', label: 'Transactions', icon: <TrendingUp className="w-6 h-6" /> },
-    { value: counts.rating.toFixed(1) + '★', label: 'User Rating', icon: <Star className="w-6 h-6" /> },
-    { value: '< 2s', label: 'Transaction Speed', icon: <Clock className="w-6 h-6" /> }
-  ]
-
-  return (
-    <section id="stats" className="py-16 md:py-20 px-4 bg-gradient-to-r from-[#0F172A] via-[#2563EB] to-[#7C3AED]">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center text-white">
-              <div className="flex justify-center mb-3"><div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur">{stat.icon}</div></div>
-              <p className="text-3xl md:text-4xl font-bold">{stat.value}</p>
-              <p className="text-white/70 text-sm mt-1">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== TESTIMONIALS ==========
-function Testimonials() {
-  const testimonials = [
-    { name: 'Michael Adebayo', location: 'Lagos, Nigeria', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face&auto=format', text: 'NexaPay made sending money to my family so easy. I can now pay bills and buy airtime in seconds.' },
-    { name: 'Chioma Okafor', location: 'Abuja, Nigeria', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face&auto=format', text: 'The best digital wallet I have used. Fast transactions and excellent customer support.' },
-    { name: 'Emeka Nwosu', location: 'Port Harcourt, Nigeria', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&auto=format', text: 'I use NexaPay daily for business payments. It is reliable and very easy to use.' }
-  ]
-
-  return (
-    <section className="py-16 md:py-24 px-4 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-[#2563EB] font-semibold text-sm uppercase tracking-wider">Testimonials</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mt-2">What our users say</h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">Hear from real people using NexaPay every day.</p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-[#F8FAFC] rounded-2xl p-6 md:p-8 border border-gray-100 hover:shadow-strong transition-all duration-300 hover:-translate-y-1">
-              <div className="flex items-center gap-3 mb-4">
-                <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover border-2 border-[#2563EB]" />
-                <div><p className="font-semibold text-[#0F172A]">{testimonial.name}</p><p className="text-sm text-gray-400">{testimonial.location}</p></div>
-              </div>
-              <div className="flex mb-3">{[1,2,3,4,5].map((star) => (<Star key={star} className="w-4 h-4 fill-amber-400 text-amber-400" />))}</div>
-              <p className="text-gray-600 leading-relaxed">"{testimonial.text}"</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== PRICING ==========
-function Pricing() {
-  const plans = [
-    { name: 'Basic', price: '₦0', description: 'Perfect for individuals', features: ['Send & Receive Money', 'Buy Airtime & Data', 'Pay Bills', 'Basic Support'], popular: false, button: 'Get Started' },
-    { name: 'Pro', price: '₦1,000', description: 'For power users', features: ['Everything in Basic', 'Priority Support', 'Higher Transaction Limits', 'Referral Rewards'], popular: true, button: 'Start Pro' },
-    { name: 'Business', price: 'Custom', description: 'For businesses', features: ['Everything in Pro', 'API Access', 'Bulk Payments', 'Dedicated Account Manager'], popular: false, button: 'Contact Sales' }
-  ]
-
-  return (
-    <section id="pricing" className="py-16 md:py-24 px-4 bg-[#F8FAFC]">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-[#2563EB] font-semibold text-sm uppercase tracking-wider">Pricing</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mt-2">Choose the plan that fits you</h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">Start for free and upgrade as you grow.</p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {plans.map((plan, index) => (
-            <div key={index} className={`bg-white rounded-2xl p-6 md:p-8 border transition-all duration-300 hover:-translate-y-2 ${plan.popular ? 'border-[#2563EB] shadow-strong shadow-blue-500/10 relative' : 'border-gray-100 shadow-soft'}`}>
-              {plan.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#2563EB] text-white text-xs font-bold px-4 py-1 rounded-full">Most Popular</div>}
-              <div className="text-center">
-                <h3 className="text-xl font-bold text-[#0F172A]">{plan.name}</h3>
-                <p className="text-gray-500 text-sm mt-1">{plan.description}</p>
-                <p className="text-4xl font-bold text-[#0F172A] mt-4">{plan.price}</p>
-                {plan.price !== 'Custom' && <p className="text-gray-400 text-sm">per month</p>}
-              </div>
-              <ul className="mt-6 space-y-3">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm text-gray-600"><Check className="w-4 h-4 text-[#2563EB] flex-shrink-0" />{feature}</li>
-                ))}
-              </ul>
-              <a href="/register" className={`block text-center mt-6 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${plan.popular ? 'bg-gradient-to-r from-[#0F172A] via-[#2563EB] to-[#7C3AED] text-white hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5' : 'border-2 border-gray-200 text-[#0F172A] hover:border-[#2563EB] hover:bg-[#2563EB]/5'}`}>{plan.button}</a>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== FAQ ==========
-function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
-  const faqs = [
-    { question: 'Is NexaPay safe to use?', answer: 'Yes! NexaPay uses bank-grade encryption and security measures to protect your money and data. All transactions are secure.' },
-    { question: 'How do I add money to my wallet?', answer: 'You can add money via bank transfer, debit card, or from another NexaPay account. Simply go to the Wallet section and choose "Add Money".' },
-    { question: 'Are there any fees?', answer: 'Basic transfers are free. There are small fees for bank transfers and certain services. Check our pricing page for details.' },
-    { question: 'How long do transfers take?', answer: 'NexaPay to NexaPay transfers are instant. Bank transfers typically take 1-2 business days.' },
-    { question: 'What services can I pay for?', answer: 'You can pay for airtime, data, electricity, TV subscriptions, and more. We are constantly adding new services.' }
-  ]
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
-  }
-
-  return (
-    <section id="faq" className="py-16 md:py-24 px-4 bg-white">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-[#2563EB] font-semibold text-sm uppercase tracking-wider">FAQ</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mt-2">Frequently Asked Questions</h2>
-          <p className="text-gray-500 mt-3">Find answers to common questions about NexaPay.</p>
-        </div>
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-[#F8FAFC] rounded-2xl border border-gray-100 overflow-hidden">
-              <button onClick={() => toggleFAQ(index)} className="w-full px-6 py-4 flex items-center justify-between hover:bg-[#F1F5F9] transition-colors">
-                <span className="font-medium text-[#0F172A] text-left flex items-center gap-3"><HelpCircle className="w-5 h-5 text-[#2563EB] flex-shrink-0" />{faq.question}</span>
-                {openIndex === index ? <Minus className="w-5 h-5 text-[#2563EB]" /> : <Plus className="w-5 h-5 text-[#2563EB]" />}
-              </button>
-              {openIndex === index && <div className="px-6 pb-4 text-gray-500 leading-relaxed">{faq.answer}</div>}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== CTA ==========
-function CTA() {
-  return (
-    <section className="relative py-16 md:py-24 px-4 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED] via-[#2563EB] to-[#7C3AED]"></div>
-      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: `radial-gradient(circle at 20% 50%, #ffffff 0%, transparent 50%), radial-gradient(circle at 80% 50%, #ffffff 0%, transparent 50%)` }}></div>
-      <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-      <div className="absolute bottom-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-      <div className="max-w-4xl mx-auto text-center text-white relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur rounded-full text-sm font-medium border border-white/20 mb-6"><Zap className="w-4 h-4" />Join the future of payments</div>
-        <h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">Start using <span className="text-white">NexaPay</span> today</h2>
-        <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Join thousands of Nigerians already enjoying seamless digital payments.</p>
-        <div className="flex flex-wrap gap-4 justify-center">
-          <a href="/register" className="group inline-flex items-center gap-2 px-8 py-4 bg-white text-[#7C3AED] rounded-xl font-semibold hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">Get Started <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></a>
-          <a href="/login" className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 backdrop-blur text-white rounded-xl font-semibold hover:bg-white/30 transition-all duration-300 border border-white/30">Log in</a>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ========== FOOTER ==========
-function Footer() {
-  return (
-    <footer className="bg-[#1A1A2E] text-white/60 py-12 px-4 border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 border-b border-white/5">
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center shadow-lg shadow-blue-500/20"><span className="text-white font-bold text-sm">N</span></div>
-              <span className="text-white font-bold text-lg">NexaPay</span>
-            </div>
-            <p className="text-sm max-w-sm text-white/50">Payments made simple. Send money, pay bills, and buy airtime instantly.</p>
-            <div className="flex gap-4 mt-4">
-              <a href="#" className="text-white/30 hover:text-white transition-colors"><svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg></a>
-              <a href="#" className="text-white/30 hover:text-white transition-colors"><svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98-3.56-.18-6.73-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a>
-              <a href="#" className="text-white/30 hover:text-white transition-colors"><svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
-            </div>
-          </div>
-          <div><h4 className="text-white font-semibold text-sm mb-4">Product</h4><ul className="space-y-2.5 text-sm"><li><a href="#features" className="hover:text-white transition-colors">Features</a></li><li><a href="#pricing" className="hover:text-white transition-colors">Pricing</a></li><li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li></ul></div>
-          <div><h4 className="text-white font-semibold text-sm mb-4">Company</h4><ul className="space-y-2.5 text-sm"><li><a href="#" className="hover:text-white transition-colors">About</a></li><li><a href="#" className="hover:text-white transition-colors">Contact</a></li><li><a href="#" className="hover:text-white transition-colors">Blog</a></li></ul></div>
-          <div><h4 className="text-white font-semibold text-sm mb-4">Legal</h4><ul className="space-y-2.5 text-sm"><li><a href="#" className="hover:text-white transition-colors">Privacy</a></li><li><a href="#" className="hover:text-white transition-colors">Terms</a></li><li><a href="#" className="hover:text-white transition-colors">Security</a></li></ul></div>
-        </div>
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 text-sm">
-          <p className="text-white/40">© 2026 NexaPay. All rights reserved.</p>
-          <div className="flex gap-6 text-sm"><a href="#" className="text-white/40 hover:text-white transition-colors">Privacy</a><a href="#" className="text-white/40 hover:text-white transition-colors">Terms</a><a href="#" className="text-white/40 hover:text-white transition-colors">Cookies</a></div>
-        </div>
-      </div>
-    </footer>
-  )
-}
