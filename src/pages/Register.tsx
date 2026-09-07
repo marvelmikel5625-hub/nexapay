@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { User, Mail, Phone, Lock, Eye, EyeOff, ArrowRight, Sparkles, Check, X, AlertCircle } from 'lucide-react'
+import { User, Mail, Phone, Lock, Eye, EyeOff, ArrowRight, Sparkles, Check, X } from 'lucide-react'
 
 export function Register() {
   const [showPassword, setShowPassword] = useState(false)
@@ -16,7 +16,6 @@ export function Register() {
     confirmPassword: ''
   })
 
-  // Password strength state
   const [passwordStrength, setPasswordStrength] = useState(0)
   const [passwordChecks, setPasswordChecks] = useState({
     length: false,
@@ -26,7 +25,6 @@ export function Register() {
     special: false
   })
 
-  // Check password strength
   useEffect(() => {
     const pwd = formData.password
     const checks = {
@@ -63,9 +61,7 @@ export function Register() {
     return 'bg-emerald-500'
   }
 
-  const getStrengthWidth = (score: number) => {
-    return `${(score / 5) * 100}%`
-  }
+  const getStrengthWidth = (score: number) => `${(score / 5) * 100}%`
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -112,9 +108,8 @@ export function Register() {
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-start gap-2 text-red-600 text-sm">
-              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <span>{error}</span>
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
+              {error}
             </div>
           )}
 
@@ -287,20 +282,7 @@ export function Register() {
               disabled={loading}
               className="w-full py-3.5 bg-[#00a86b] text-white rounded-xl font-semibold hover:bg-[#087f5b] transition-all duration-300 hover:shadow-lg hover:shadow-[#00a86b]/25 hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {loading ? (
-                <span className="flex items-center gap-2">
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Creating account...
-                </span>
-              ) : (
-                <>
-                  Create Account
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
+              {loading ? 'Creating account...' : 'Create Account →'}
             </button>
           </form>
 
