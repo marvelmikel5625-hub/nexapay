@@ -1,15 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [faqOpen, setFaqOpen] = useState<number | null>(null)
 
-  // Toggle FAQ
-  const toggleFaq = (index: number) => {
-    setFaqOpen(faqOpen === index ? null : index)
-  }
-
-  // Scroll reveal effect
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -29,15 +23,18 @@ function App() {
     return () => observer.disconnect()
   }, [])
 
-  return (
-    <div className="nexapay-app">
+  const toggleFaq = (index: number) => {
+    setFaqOpen(faqOpen === index ? null : index)
+  }
 
-      {/* ========== TOP BAR ========== */}
+  return (
+    <div>
+      {/* Top Bar */}
       <div className="bar">
         NexaPay <b>•</b> A simpler way to manage everyday payments.
       </div>
 
-      {/* ========== HEADER ========== */}
+      {/* Navigation */}
       <header className={`nav ${isMenuOpen ? 'open' : ''}`} id="nav">
         <div className="wrap navin">
           <a className="logo" href="#">
@@ -60,7 +57,7 @@ function App() {
         </div>
       </header>
 
-      {/* ========== HERO ========== */}
+      {/* Hero */}
       <section className="hero">
         <div className="wrap heroGrid">
           <div className="reveal">
@@ -116,7 +113,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== MARQUEE ========== */}
+      {/* Marquee */}
       <section className="marqueeSec">
         <div className="marqueeTitle">Built around the services Nigerians use every day</div>
         <div className="marqueeBox">
@@ -145,7 +142,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== FEATURES ========== */}
+      {/* Features */}
       <section className="section" id="features">
         <div className="wrap">
           <div className="intro reveal">
@@ -159,7 +156,6 @@ function App() {
             </div>
           </div>
 
-          {/* Send Money */}
           <div className="service reveal">
             <div className="copy">
               <div className="kicker">Send money</div>
@@ -181,7 +177,6 @@ function App() {
             </div>
           </div>
 
-          {/* Airtime & Data */}
           <div className="service reverse reveal">
             <div className="copy">
               <div className="kicker">Airtime & data</div>
@@ -203,7 +198,6 @@ function App() {
             </div>
           </div>
 
-          {/* Bills */}
           <div className="service reveal">
             <div className="copy">
               <div className="kicker">Bills</div>
@@ -227,7 +221,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== BUILT FOR NIGERIA ========== */}
+      {/* Built for Nigeria */}
       <section className="section dark">
         <div className="wrap eco">
           <div className="reveal">
@@ -248,7 +242,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== SECURITY ========== */}
+      {/* Security */}
       <section className="section" id="security">
         <div className="wrap">
           <div className="head reveal">
@@ -289,7 +283,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== HOW IT WORKS ========== */}
+      {/* How It Works */}
       <section className="section soft" id="how">
         <div className="wrap">
           <div className="head reveal">
@@ -317,7 +311,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== TESTIMONIAL ========== */}
+      {/* Testimonial */}
       <section className="section">
         <div className="wrap testimonial">
           <div className="photo reveal">
@@ -332,7 +326,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== FAQ ========== */}
+      {/* FAQ */}
       <section className="section soft" id="faq">
         <div className="wrap">
           <div className="head reveal">
@@ -368,7 +362,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== CTA ========== */}
+      {/* CTA */}
       <section className="cta" id="start">
         <div className="wrap">
           <div className="ctaBox reveal">
@@ -385,7 +379,7 @@ function App() {
         </div>
       </section>
 
-      {/* ========== FOOTER ========== */}
+      {/* Footer */}
       <footer className="footer" id="login">
         <div className="wrap">
           <div className="footGrid">
@@ -423,7 +417,6 @@ function App() {
           </div>
         </div>
       </footer>
-
     </div>
   )
 }
