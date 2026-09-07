@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { User, Mail, Phone, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react'
 
 export function Register() {
   const [showPassword, setShowPassword] = useState(false)
@@ -39,7 +40,6 @@ export function Register() {
         </Link>
 
         <div className="bg-white rounded-2xl shadow-soft p-8 border border-gray-100">
-          {/* Logo */}
           <div className="text-center mb-8">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#2563EB] to-[#7C3AED] flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-500/20">
               <span className="text-white font-bold text-2xl">N</span>
@@ -48,147 +48,177 @@ export function Register() {
             <p className="text-gray-500 text-sm mt-1">Get started with NexaPay today</p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name Fields */}
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-sm font-medium text-[#0F172A] block mb-1.5">First name</label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder="John"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 bg-[#F8FAFC]"
-                  required
-                />
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    placeholder="John"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400"
+                    required
+                  />
+                </div>
               </div>
               <div>
                 <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Last name</label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    placeholder="Doe"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Email Address</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
+                  type="email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
-                  placeholder="Doe"
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 bg-[#F8FAFC]"
+                  placeholder="you@example.com"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400"
                   required
                 />
               </div>
             </div>
 
-            {/* Email */}
-            <div>
-              <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Email Address</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="you@example.com"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 bg-[#F8FAFC]"
-                required
-              />
-            </div>
-
-            {/* Phone */}
             <div>
               <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Phone Number</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="080 1234 5678"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 bg-[#F8FAFC]"
-                required
-              />
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="080 1234 5678"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400"
+                  required
+                />
+              </div>
             </div>
 
-            {/* Password */}
             <div>
               <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Password</label>
               <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Create a strong password"
-                  className="w-full px-4 pr-12 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 bg-[#F8FAFC]"
+                  className="w-full pl-10 pr-12 py-3 rounded-xl border border-gray-200 focus:border-[#00a86b] focus:outline-none focus:ring-2 focus:ring-[#00a86b]/20 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  {showPassword ? '🙈' : '👁️'}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
 
-            {/* Confirm Password */}
             <div>
               <label className="text-sm font-medium text-[#0F172A] block mb-1.5">Confirm Password</label>
               <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm your password"
-                  className={`w-full px-4 pr-12 py-3 rounded-xl border ${
+                  className={`w-full pl-10 pr-12 py-3 rounded-xl border ${
                     formData.confirmPassword && formData.password !== formData.confirmPassword
                       ? 'border-red-400 focus:border-red-500 focus:ring-red-500/20'
                       : formData.confirmPassword && formData.password === formData.confirmPassword
-                      ? 'border-green-400 focus:border-green-500 focus:ring-green-500/20'
+                      ? 'border-emerald-400 focus:border-emerald-500 focus:ring-emerald-500/20'
                       : 'border-gray-200 focus:border-[#00a86b] focus:ring-[#00a86b]/20'
-                  } focus:outline-none focus:ring-2 bg-[#F8FAFC]`}
+                  } focus:outline-none focus:ring-2 transition-all duration-200 bg-[#F8FAFC] text-[#0F172A] placeholder:text-gray-400`}
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
-                  {showConfirmPassword ? '🙈' : '👁️'}
+                  {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
               {formData.confirmPassword && (
-                <p className={`text-xs mt-1 ${formData.password === formData.confirmPassword ? 'text-green-500' : 'text-red-500'}`}>
+                <p className={`text-xs mt-1 ${
+                  formData.password === formData.confirmPassword ? 'text-emerald-500' : 'text-red-500'
+                }`}>
                   {formData.password === formData.confirmPassword ? '✅ Passwords match' : '❌ Passwords do not match'}
                 </p>
               )}
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 bg-[#00a86b] text-white rounded-xl font-semibold hover:bg-[#087f5b] transition-all duration-300 hover:shadow-lg hover:shadow-[#00a86b]/25 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full py-3.5 bg-[#00a86b] text-white rounded-xl font-semibold hover:bg-[#087f5b] transition-all duration-300 hover:shadow-lg hover:shadow-[#00a86b]/25 hover:-translate-y-0.5 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              {loading ? 'Creating account...' : 'Create Account →'}
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Creating account...
+                </span>
+              ) : (
+                <>
+                  Create Account
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </button>
           </form>
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Already have an account?{' '}
-            <Link to="/login" className="text-[#00a86b] font-semibold hover:underline">Sign in →</Link>
+            <Link to="/login" className="text-[#00a86b] font-semibold hover:underline">
+              Sign in →
+            </Link>
           </p>
 
           <div className="flex items-center gap-4 my-6">
             <div className="flex-1 h-px bg-gray-200"></div>
-            <span className="text-gray-400 text-xs uppercase">or</span>
+            <span className="text-gray-400 text-xs uppercase tracking-wider">or</span>
             <div className="flex-1 h-px bg-gray-200"></div>
           </div>
 
-          <Link to="/" className="block w-full py-3 text-center border-2 border-gray-200 text-[#0F172A] rounded-xl font-medium hover:border-[#00a86b] hover:bg-[#00a86b]/5 transition-all duration-200">
+          <Link
+            to="/"
+            className="w-full py-3 border-2 border-gray-200 text-[#0F172A] rounded-xl font-medium hover:border-[#00a86b] hover:bg-[#00a86b]/5 transition-all duration-200 flex items-center justify-center gap-2"
+          >
+            <Sparkles className="w-4 h-4 text-gray-400" />
             Continue as Guest
           </Link>
 
-          <p className="text-center text-gray-400 text-xs mt-8">© 2026 NexaPay. All rights reserved.</p>
+          <p className="text-center text-gray-400 text-xs mt-8">
+            © 2026 NexaPay. All rights reserved.
+          </p>
         </div>
       </div>
     </div>
