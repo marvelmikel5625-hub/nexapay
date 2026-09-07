@@ -156,7 +156,6 @@ function App() {
             </div>
           </div>
 
-          {/* Send Money */}
           <div className="service reveal">
             <div className="copy">
               <div className="kicker">Send money</div>
@@ -178,7 +177,6 @@ function App() {
             </div>
           </div>
 
-          {/* Airtime & Data - WITH REAL LOGOS */}
           <div className="service reverse reveal">
             <div className="copy">
               <div className="kicker">Airtime & data</div>
@@ -192,7 +190,6 @@ function App() {
             </div>
             <div className="visual">
               <div className="networks">
-                {/* MTN - Yellow */}
                 <div className="network" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -207,7 +204,6 @@ function App() {
                   <span style={{ fontWeight: '700' }}>MTN</span>
                 </div>
                 
-                {/* Airtel - Red */}
                 <div className="network" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -222,7 +218,6 @@ function App() {
                   <span style={{ fontWeight: '700' }}>Airtel</span>
                 </div>
                 
-                {/* Glo - Green */}
                 <div className="network" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -237,7 +232,6 @@ function App() {
                   <span style={{ fontWeight: '700' }}>Glo</span>
                 </div>
                 
-                {/* 9mobile - Purple */}
                 <div className="network" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
@@ -255,7 +249,6 @@ function App() {
             </div>
           </div>
 
-          {/* Bills */}
           <div className="service reveal">
             <div className="copy">
               <div className="kicker">Bills</div>
@@ -427,18 +420,39 @@ function App() {
             background: 'linear-gradient(135deg, #0d241c, #124331)',
             borderRadius: '34px',
             padding: '60px 40px',
-            textAlign: 'center'
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}>
-            <div>
+            <div style={{ 
+              maxWidth: '700px',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
               <div className="kicker" style={{ color: '#72e6b5' }}>Ready when you are</div>
-              <h2 style={{ color: '#fff', fontSize: 'clamp(32px, 4vw, 48px)' }}>
+              <h2 style={{ 
+                color: '#fff', 
+                fontSize: 'clamp(32px, 4vw, 48px)',
+                margin: '10px 0 16px',
+                textAlign: 'center'
+              }}>
                 Make everyday payments simpler.
               </h2>
-              <p style={{ color: '#b8cec4', maxWidth: '600px', margin: '16px auto' }}>
+              <p style={{ 
+                color: '#b8cec4', 
+                maxWidth: '600px', 
+                margin: '0 auto 30px',
+                textAlign: 'center',
+                fontSize: '17px',
+                lineHeight: '1.6'
+              }}>
                 One focused experience for sending money, staying connected and taking care of everyday bills.
               </p>
               
-              {/* Trust Badges */}
               <div style={{ 
                 display: 'flex', 
                 justifyContent: 'center', 
@@ -448,23 +462,30 @@ function App() {
                 fontSize: '14px',
                 color: '#b8cec4'
               }}>
-                <span>✅ Free to start</span>
-                <span>✅ No hidden fees</span>
-                <span>✅ Cancel anytime</span>
+                <span>✅ Zero commitment</span>
+                <span>✅ What you see is what you pay</span>
+                <span>✅ Full control, always</span>
               </div>
               
-              <div className="actions" style={{ justifyContent: 'center' }}>
+              <div className="actions" style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                gap: '12px',
+                flexWrap: 'wrap'
+              }}>
                 <a className="btn outline" href="#login" style={{ 
                   borderColor: 'rgba(255,255,255,0.3)', 
                   color: '#fff',
-                  background: 'transparent'
+                  background: 'transparent',
+                  padding: '12px 28px'
                 }}>
                   Log in
                 </a>
                 <a className="btn primary" href="#" style={{ 
                   background: 'var(--g)',
                   color: '#fff',
-                  boxShadow: '0 10px 25px #00a86b2e'
+                  boxShadow: '0 10px 25px #00a86b2e',
+                  padding: '12px 28px'
                 }}>
                   Get started →
                 </a>
